@@ -9,11 +9,13 @@ pub fn hash_maps() {
     std::io::stdin()
         .read_line(&mut opt)
         .expect("Failed to read line");
+    let opt = opt.chars().nth(0).unwrap();
 
     match opt {
-        String::from("1") => add_eployee(),
-        String::from("2") => list_all_employees(),
-        String::from("3") => list_department_employees(),
+        '1' => add_eployee(),
+        '2' => list_all_employees(),
+        '3' => list_department_employees(),
+        _ => panic!(),
     }
 
     println!("{}", opt);
