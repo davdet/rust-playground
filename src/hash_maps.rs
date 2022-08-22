@@ -48,13 +48,32 @@ fn add_eployee(empl_dept: &mut HashMap<String, String>) {
     let employee_dept = employee_dept.trim().to_string();
 
     empl_dept.entry(employee_name).or_insert(employee_dept);
-    println!("{:?}", empl_dept);
+    println!("{:?}", empl_dept.keys());
 }
 
 fn list_all_employees(empl_dept: &mut HashMap<String, String>) {
     println!("List all employees");
+
+    let mut employees: Vec<String> = empl_dept.keys().cloned().collect();
+    employees.sort();
+    println!("{:#?}", employees);
 }
 
 fn list_department_employees(empl_dept: &mut HashMap<String, String>) {
     println!("List department employees");
+
+    println!("Enter the department: ");
+    let mut department = String::new();
+    std::io::stdin()
+        .read_line(&mut department)
+        .expect("Failed to read line");
+    let department = department.trim().to_string();
+
+    let mut employees = Vec::new();
+    for (key, value) in empl_dept {
+        if value == &department {
+            employees.push(key);
+        }
+    }
+    println!("{:#?}", employees);
 }
